@@ -10,4 +10,10 @@ RUN npm install --production
 
 COPY . .
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
+
+FROM production as local
+
+RUN npm install
+
+FROM production
