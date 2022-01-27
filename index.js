@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 3000;
 
 app.get("/", (req, res) => {
   return res.json({
@@ -9,6 +8,4 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Titanic API listening on port ${port}`);
-});
+exports = module.exports = app
