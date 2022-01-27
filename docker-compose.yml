@@ -12,3 +12,12 @@ services:
       - /opt/titanic-api/node_modules
     ports:
       - 3000:3000
+  tests:
+    build:
+      context: .
+      target: local
+    image: chriscmsoft/titanic-api:local
+    command: ["npm", "run", "test:watch"]
+    volumes:
+      - .:/opt/titanic-api
+      - /opt/titanic-api/node_modules
