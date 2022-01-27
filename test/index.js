@@ -1,8 +1,9 @@
-var assert = require('assert');
-describe('Array', function () {
-  describe('#indexOf()', function () {
-    it('should return -1 when the value is not present', function () {
-      assert.equal([1, 2, 3].indexOf(4), -1);
-    });
-  });
+const supertest = require('supertest');
+const assert = require('mocha');
+const expect = require('chai').expect;
+const app = require('../index');
+
+it('Should return API information on root URL', async () => {
+  const response = await supertest(app).get('/');
+  expect(response.body.about).to.equal("Titanic API");
 });
