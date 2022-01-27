@@ -4,7 +4,11 @@ services:
   api:
     build: .
     volumes:
-      - .:/usr/app/
-      - ./node_modules
+      # Mount our code base so changes are propagated
+      - .:/opt/titanic-api
+      # Virtually unmount the node_modules directory, to keep local and in-docker separate
+      # This is necessary especially with node modules, which need to be built for different architectures (local & docker)
+      # Propagating node_modules would break in-docker binaries with local versions
+      - /opt/titanic-api/node_modules
     ports:
       - 3000:3000
