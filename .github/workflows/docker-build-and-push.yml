@@ -18,12 +18,11 @@ env:
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: chriscmsoft/titanic-api
-  DH_USERNAME: ${{ secrets.DH_USERNAME }}
-  DH_PASSWORD: ${{ secrets.DH_PASSWORD }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
     steps:
@@ -41,8 +40,8 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ env.DH_USERNAME }}
-          password: ${{ env.DH_PASSWORD }}
+          username: ${{ secrets.DH_USERNAME }}
+          password: ${{ secrets.DH_PASSWORD }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
