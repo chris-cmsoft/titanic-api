@@ -102,6 +102,7 @@ jobs:
       - name: Test
         run: |
           echo "${{ steps.meta.outputs.tags }}"
+          echo "${{ fromJSON(steps.meta.outputs.json) }}"
 #          echo '::warning:: this is a warning'
 #          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
 #          echo '::warning:: this will NOT be a warning'
