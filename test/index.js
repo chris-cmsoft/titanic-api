@@ -1,5 +1,4 @@
 const supertest = require('supertest');
-const assert = require('mocha');
 const expect = require('chai').expect;
 const app = require('../index');
 
