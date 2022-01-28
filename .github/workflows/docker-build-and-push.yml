@@ -16,6 +16,7 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
+  DH_USERNAME: chriscmsoft
   # github.repository as <account>/<repo>
   IMAGE_NAME: chriscmsoft/titanic-api
 
@@ -40,7 +41,7 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.DH_USERNAME }}
+          username: ${{ env.DH_USERNAME }}
           password: ${{ secrets.DH_PASSWORD }}
 
       # Extract metadata (tags, labels) for Docker
