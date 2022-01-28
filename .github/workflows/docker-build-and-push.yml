@@ -21,9 +21,30 @@ env:
   IMAGE_NAME: chriscmsoft/titanic-api
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - run: npm install
+      - run: npm run test
+  lint:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - run: npm install
+      - run: npm run lint
   build:
     runs-on: ubuntu-latest
     environment: production
+    needs: [lint, test]
     permissions:
       contents: read
     steps:
@@ -68,16 +89,3 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Test
-        run: |
-          echo "${{ steps.meta.outputs.tags }}"
-          echo "${{ fromJson(steps.meta.outputs.json).tags[0] }}"
-      #          echo '::warning:: this is a warning'
-      #          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-      #          echo '::warning:: this will NOT be a warning'
-      #          echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
-      #          echo '::warning:: this is a warning again'
-
