@@ -8,4 +8,10 @@ app.get("/", (req, res) => {
   });
 });
 
-exports = module.exports = app
+app.get("/people", (req, res) => {
+  return res.json({
+    people: [],
+  });
+});
+
+exports = module.exports = app;
