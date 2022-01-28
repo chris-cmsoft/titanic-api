@@ -2,7 +2,11 @@ version: '3'
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      target: local
+    image: chriscmsoft/titanic-api:local
+    command: ["npm", "run", "dev"]
     volumes:
       # Mount our code base so changes are propagated
       - .:/opt/titanic-api
