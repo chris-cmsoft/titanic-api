@@ -26,26 +26,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Workaround: https://github.com/docker/build-push-action/issues/461
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          target: local
-          push: false
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
-
       - name: test
         run: docker-compose run --entrypoint="" tests npm run test
-
-      - name: test
-        run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run test
 
       - name: lint
         run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run lint
