@@ -20,39 +20,23 @@ env:
   IMAGE_NAME: chriscmsoft/titanic-api
 
 jobs:
-  test-in-docker:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: test
+      - name: Run Unit Tests
         run: docker-compose run --entrypoint="" tests npm run test
-
-      - name: lint
-        run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run lint
-
-  test:
+  Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - run: npm install
-      - run: npm run test
-  lint:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run Linter
+        run: docker-compose run --entrypoint="" tests npm run lint
+  Build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - run: npm install
-      - run: npm run lint
-  build:
-    runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [Test, Lint]
     permissions:
       contents: read
     steps:
