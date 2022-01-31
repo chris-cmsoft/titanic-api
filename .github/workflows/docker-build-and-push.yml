@@ -39,14 +39,13 @@ jobs:
           context: .
           target: local
           push: false
-          tags:
-            - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
 
       - name: test
-        run: docker run --entrypoint="" chriscmsoft/titanic-api:local npm run test
+        run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run test
 
       - name: lint
-        run: docker run --entrypoint="" chriscmsoft/titanic-api:local npm run lint
+        run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run lint
 
   test:
     runs-on: ubuntu-latest
