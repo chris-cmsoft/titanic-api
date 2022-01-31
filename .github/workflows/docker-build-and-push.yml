@@ -42,10 +42,10 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
 
       - name: test
-        run: docker run --entrypoint="" -it chriscmsoft/titanic-api:local npm run test
+        run: docker run --entrypoint="" chriscmsoft/titanic-api:local npm run test
 
       - name: lint
-        run: docker run --entrypoint="" -it chriscmsoft/titanic-api:local npm run lint
+        run: docker run --entrypoint="" chriscmsoft/titanic-api:local npm run lint
 
   test:
     runs-on: ubuntu-latest
