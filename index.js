@@ -9,6 +9,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/people", (req, res) => {
+  const test = "";
   return res.json({
     people: [],
   });
