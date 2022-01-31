@@ -42,6 +42,9 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
 
       - name: test
+        run: docker-compose run --entrypoint="" tests npm run test
+
+      - name: test
         run: docker run --entrypoint="" chriscmsoft/titanic-api:ci npm run test
 
       - name: lint
