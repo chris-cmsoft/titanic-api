@@ -29,6 +29,8 @@ jobs:
         run: docker-compose run --entrypoint="" tests npm run test
   Lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
